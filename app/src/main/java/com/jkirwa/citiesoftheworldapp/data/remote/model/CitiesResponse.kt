@@ -25,7 +25,7 @@ data class ListItem(
     val createdAt: String? = null,
     @field:SerializedName("updated_at")
     val updatedAt: String? = null,
-    @field:SerializedName("name")
+    @field:SerializedName("continent_id")
     val countryId: Int? = null,
     @field:SerializedName("country")
     val country: Country? = null
@@ -44,9 +44,9 @@ data class Country(
     @field:SerializedName("created_at")
     val createdAt: String? = null,
 
-    @field:SerializedName("created_at")
+    @field:SerializedName("updated_at")
     val updatedAt: String? = null,
 
-    @field:SerializedName("id")
+    @field:SerializedName("continent_id")
     val continentId: Int? = null
 )
