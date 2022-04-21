@@ -3,6 +3,7 @@
     package="com.jkirwa.citiesoftheworldapp">
 
     <application
+        android:name=".CitiesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_cities_launch"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CitiesOfTheWorldApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.cities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
