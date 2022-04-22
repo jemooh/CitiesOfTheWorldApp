@@ -8,6 +8,7 @@
         android:name=".CitiesApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_cities_launch"
+        android:usesCleartextTraffic="true"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_cities_launch_round"
         android:supportsRtl="true"
