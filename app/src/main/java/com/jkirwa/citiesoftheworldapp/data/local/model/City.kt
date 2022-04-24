@@ -3,13 +3,12 @@ package com.jkirwa.citiesoftheworldapp.data.local.model
 import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import java.util.*
 
-@Entity(indices = [Index(value = ["id"], unique = true)])
+@Entity(indices = [Index(value = ["cityId"], unique = true)])
 data class City(
     @PrimaryKey
-    val id: Int,
-    val name: String?,
+    val cityId: Int = 0,
+    val cityName: String?,
     val countryId: Int?,
     val lat: Double?,
     val lng: Double?,

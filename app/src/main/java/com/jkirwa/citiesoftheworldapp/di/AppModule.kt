@@ -1,6 +1,5 @@
 package com.jkirwa.citiesoftheworldapp.di
 
-import android.content.Context
 import androidx.room.Room
 import com.jkirwa.citiesoftheworldapp.data.local.datasource.CitiesDatabase
 import com.jkirwa.citiesoftheworldapp.data.remote.api.CitiesApiService
@@ -8,7 +7,6 @@ import com.jkirwa.citiesoftheworldapp.data.repository.CitiesRepository
 import com.jkirwa.citiesoftheworldapp.data.repository.CitiesRepositoryImpl
 import com.jkirwa.citiesoftheworldapp.ui.cities.viewmodel.CitiesViewModel
 import com.jkirwa.citiesoftheworldapp.utils.Constants
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -35,10 +33,15 @@ val appModule = module {
         get<CitiesDatabase>().citiesDao
     }
 
+    single {
+        get<CitiesDatabase>().countriesDao
+    }
+
     factory<CitiesRepository> {
         CitiesRepositoryImpl(
             citiesApiService = get(),
             citiesDao = get(),
+            countriesDao = get(),
         )
     }
 
