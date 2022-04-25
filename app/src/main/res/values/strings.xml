@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cities Of The World App</string>
+    <string name="search_place_holder_text">Type to search cities</string>
+    <string name="search_message">Searching cities… </string>
+    <string name="search_not_found_message">Searched city not found… </string>
+    <string name="fetch_message">Fetch cities… </string>
+    <string name="empty_message">Your cities list is empty</string>
 </resources>

@@ -24,7 +24,7 @@ internal class CitiesRepositoryImpl(
         return withContext(isDispatcher) {
             try {
                 Result.Loading
-                val result = citiesApiService.fetchRemoteCities()
+                val result = citiesApiService.fetchRemoteCities(page = page)
                 if (result.isSuccessful) {
                     val remoteCities = result.body()
                     remoteCities?.data?.items?.forEach { listItem ->
@@ -38,6 +38,8 @@ internal class CitiesRepositoryImpl(
                                 createdAt = createdAt,
                                 updatedAt = updatedAt
                             )
+
+                            city.currentPage = remoteCities?.data?.pagination?.currentPage ?: 1
                             citiesDao.insertAsync(city)
                             country?.apply {
                                 val country = Country(
@@ -70,8 +72,66 @@ internal class CitiesRepositoryImpl(
     }
 
 
+    override suspend fun searchRemoteCities(queryText: String, page: Int): Result<Boolean> {
+        return withContext(isDispatcher) {
+            try {
+                Result.Loading
+                val result = citiesApiService.searchRemoteCities(queryText = queryText, page = page)
+                if (result.isSuccessful) {
+                    if (result.body()?.data?.items?.isNotEmpty() == true) {
+                        val remoteCities = result.body()
+                        remoteCities?.data?.items?.forEach { listItem ->
+                            listItem?.apply {
+                                val city = City(
+                                    cityId = id ?: 0,
+                                    cityName = name,
+                                    countryId = country?.id,
+                                    lat = lat,
+                                    lng = lng,
+                                    createdAt = createdAt,
+                                    updatedAt = updatedAt
+                                )
+
+                                citiesDao.insertAsync(city)
+                                country?.apply {
+                                    val country = Country(
+                                        countryId = id ?: 0,
+                                        countryName = name,
+                                        countryCode = code,
+                                        createdAt = createdAt,
+                                        updatedAt = updatedAt,
+                                        continentId = continentId
+                                    )
+                                    countriesDao.insertAsync(country)
+                                }
+
+                            }
+
+                        }
+                        Result.Success(true)
+                    } else {
+                        Result.Success(false)
+                    }
+
+                } else {
+                    Result.Error(Exception(result.errorBody().toString()))
+                }
+            } catch (e: IOException) {
+                Result.Error(Exception("Error Occurred"))
+                e.printStackTrace()
+                Timber.e(e)
+            }
+            Result.Success(false)
+        }
+    }
+
+
     override fun getCities(): Flow<List<CityView>> {
         return citiesDao.getAllCities()
+    }
+
+    override fun getCurrentPage(): Flow<Int?>? {
+        return citiesDao.getCurrentPage()
     }
 
     override fun searchCities(queryText: String): Flow<List<CityView>> {

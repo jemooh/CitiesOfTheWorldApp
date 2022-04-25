@@ -145,6 +145,8 @@ plugins {
             implementation("androidx.compose.compiler:compiler:1.1.1")
             implementation("androidx.paging:paging-runtime-ktx:3.1.1")
             implementation("androidx.paging:paging-compose:1.0.0-alpha14")
+            implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
+
 
             // Compose dependencies
             implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha06")

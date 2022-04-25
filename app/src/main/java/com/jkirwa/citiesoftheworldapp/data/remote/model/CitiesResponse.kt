@@ -9,7 +9,14 @@ data class CitiesResponse(
 
 data class Data(
     @field:SerializedName("items")
-    val items: List<ListItem>? = null
+    val items: List<ListItem>? = null,
+    @field:SerializedName("pagination")
+    val pagination: Pagination? = null
+)
+
+data class Pagination(
+    @field:SerializedName("current_page")
+    val currentPage: Int? = null
 )
 
 data class ListItem(

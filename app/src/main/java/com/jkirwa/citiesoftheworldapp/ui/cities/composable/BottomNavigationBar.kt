@@ -54,7 +54,7 @@ fun BottomNavigationBar(navController: NavController) {
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
-            WorldCities()
+            WorldCitiesListScreen()
         }
         composable(NavigationItem.Map.route) {
             WorldCitiesMapView()
