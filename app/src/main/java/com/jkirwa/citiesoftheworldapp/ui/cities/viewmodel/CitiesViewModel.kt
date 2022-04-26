@@ -28,7 +28,6 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
     private var fetchRemoteCitiesJob: Job? = null
 
 
-
     fun getCurrentPage() {
         viewModelScope.launch {
             citiesRepository.getCurrentPage()
@@ -55,7 +54,6 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
                     )
                 }
                 is Result.Error -> {
-                    Timber.d("Updated--Error occurred")
                     _state.value = state.value.copy(
                         isErrorFetchingCities = true,
                         errorMessage = result.exception.message.toString()
@@ -93,16 +91,12 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
 
     fun nextPage() {
         viewModelScope.launch {
-            // prevent duplicate event due to recompose happening to quickly
             if ((citiesListScrollPosition + 1) >= (state.value.page * PAGE_SIZE)) {
                 _state.value = state.value.copy(
                     isLoadingCities = true
                 )
                 incrementPage()
                 Timber.d("nextPage: triggered: ${state.value.page}")
-
-                // just to show pagination, api is fast
-                //delay(1000)
 
                 if (state.value.page > 1) {
                     when (val result = citiesRepository.fetchRemoteCities(state.value.page)) {
@@ -149,7 +143,6 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
 
 
     fun getAllCities() {
-        resetSearchState()
         getCitiesJob?.cancel()
         getCitiesJob = citiesRepository.getCities()
             .onEach { cities_ ->

@@ -23,6 +23,7 @@ fun WorldCitiesMapView() {
     val mapView = rememberMapViewWithLifecycle()
     val citiesViewModel = getViewModel<CitiesViewModel>()
     val uiState = citiesViewModel.state.collectAsState().value
+    citiesViewModel.getAllCities()
     Column(
         modifier = Modifier
             .fillMaxHeight()

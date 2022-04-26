@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,28 +38,19 @@ fun WorldCitiesListScreen() {
 
     var showClearIcon by remember { mutableStateOf(false) }
 
+
     if (uiState.query.isEmpty()) {
         showClearIcon = false
+        uiState.isSearchingCities = false
+        citiesViewModel.getAllCities()
     } else if (uiState.query.isNotEmpty()) {
         showClearIcon = true
+        uiState.isSearchingCities = true
     }
-
 
     if (!uiState.isSearchingCities && uiState.cities.isEmpty() && uiState.query.isEmpty()) {
         ShowProgressBar(textMessage = stringResource(R.string.fetch_message))
     } else {
-        /*val listState = rememberLazyListState()
-        LazyColumn(state = listState){
-            items(uiState.cities){
-                CityListItem(cityView = it)
-            }
-        }
-
-        listState.OnBottomReached {
-            if (!loading){
-                citiesViewModel.nextPage()
-            }
-        }*/
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -71,7 +61,7 @@ fun WorldCitiesListScreen() {
                 .fillMaxHeight()
         ) {
 
-            val textState = remember { mutableStateOf(TextFieldValue()) }
+            val textState = remember { mutableStateOf("") }
             OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,9 +71,9 @@ fun WorldCitiesListScreen() {
                 value = textState.value,
                 onValueChange = { onQueryChanged ->
                     textState.value = onQueryChanged
-                    citiesViewModel.state.value.query = onQueryChanged.text
-                    if (onQueryChanged.text.isNotEmpty()) {
-                        citiesViewModel.searchCities(onQueryChanged.text)
+                    citiesViewModel.state.value.query = onQueryChanged
+                    if (onQueryChanged.isNotEmpty()) {
+                        citiesViewModel.searchCities(onQueryChanged)
                     } else {
                         citiesViewModel.getAllCities()
                     }
@@ -104,7 +94,11 @@ fun WorldCitiesListScreen() {
                 },
                 trailingIcon = {
                     if (showClearIcon) {
-                        IconButton(onClick = { }) {
+                        IconButton(onClick = {
+                            textState.value = ""
+                            uiState.query = ""
+                            citiesViewModel.getAllCities()
+                        }) {
                             Icon(
                                 imageVector = Icons.Rounded.Clear,
                                 tint = MaterialTheme.colors.onBackground,

@@ -224,10 +224,6 @@ plugins {
             implementation("com.google.maps.android:maps-utils-ktx:3.4.0")
             implementation("com.google.android.gms:play-services-maps:18.0.2")
 
-            // Testing
-            // leak canary
-            debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
-
             // UI Test - Compose
             androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
             androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")
