@@ -13,5 +13,6 @@ data class City(
     val lat: Double?,
     val lng: Double?,
     val createdAt: String?,
-    val updatedAt: String?
+    val updatedAt: String?,
+    var currentPage: Int = 1
 )

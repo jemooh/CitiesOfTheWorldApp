@@ -22,8 +22,8 @@ import org.koin.androidx.compose.getViewModel
 fun WorldCitiesMapView() {
     val mapView = rememberMapViewWithLifecycle()
     val citiesViewModel = getViewModel<CitiesViewModel>()
-    citiesViewModel.getCurrentWeather()
     val uiState = citiesViewModel.state.collectAsState().value
+    citiesViewModel.getAllCities()
     Column(
         modifier = Modifier
             .fillMaxHeight()

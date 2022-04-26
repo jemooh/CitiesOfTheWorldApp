@@ -145,6 +145,8 @@ plugins {
             implementation("androidx.compose.compiler:compiler:1.1.1")
             implementation("androidx.paging:paging-runtime-ktx:3.1.1")
             implementation("androidx.paging:paging-compose:1.0.0-alpha14")
+            implementation("androidx.compose.runtime:runtime-livedata:1.1.1")
+
 
             // Compose dependencies
             implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha06")
@@ -221,10 +223,6 @@ plugins {
             implementation("com.google.maps.android:maps-ktx:3.4.0")
             implementation("com.google.maps.android:maps-utils-ktx:3.4.0")
             implementation("com.google.android.gms:play-services-maps:18.0.2")
-
-            // Testing
-            // leak canary
-            debugImplementation("com.squareup.leakcanary:leakcanary-android:2.7")
 
             // UI Test - Compose
             androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

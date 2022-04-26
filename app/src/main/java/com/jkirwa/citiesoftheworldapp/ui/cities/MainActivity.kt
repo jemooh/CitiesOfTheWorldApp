@@ -14,18 +14,14 @@ import com.jkirwa.citiesoftheworldapp.ui.cities.composable.BottomNavigationBar
 import com.jkirwa.citiesoftheworldapp.ui.cities.composable.Navigation
 import com.jkirwa.citiesoftheworldapp.ui.cities.theme.CitiesAppTheme
 import com.jkirwa.citiesoftheworldapp.ui.cities.theme.TopBar
-import com.jkirwa.citiesoftheworldapp.ui.cities.viewmodel.CitiesViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
-    private val citiesViewModel: CitiesViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setContent {
             MainScreen()
         }
-        citiesViewModel.fetchRemoteCities()
     }
 
 

@@ -14,9 +14,9 @@ Requirements
   * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html)
   * [KOIN Dependency](https://insert-koin.io/)
   * [Retrofit](https://square.github.io/retrofit/)
-    * [Jetpack](https://developer.android.com/jetpack)
-        * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
-        * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
+  * [Jetpack](https://developer.android.com/jetpack)
+    * [Lifecycle](https://developer.android.com/topic/libraries/architecture/lifecycle)
+    * [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 * [Timber](https://github.com/JakeWharton/timber)
 
 * Architecture
@@ -31,11 +31,9 @@ Requirements
 * Gradle
   * [Gradle Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
   * Plugins
-    * [Spotless](https://github.com/diffplug/spotless)
-    * [Dokka](https://github.com/Kotlin/dokka)
-    * [jacoco](https://github.com/jacoco/jacoco)
-    * [Ktlint](https://github.com/JLLeitschuh/ktlint-gradle)
-    * [Detekt](https://github.com/detekt/detekt)
+    * [jacoco(code coverage)](https://github.com/jacoco/jacoco)
 
-* CI/CD
-  * Github Actions
+### Cities app screenshots
+
+| <img src="listview.jpg" height="480">
+||  <img src="mapview.jpg" height="480">
