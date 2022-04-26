@@ -34,6 +34,8 @@ fun WorldCitiesListScreen() {
     val uiState = citiesViewModel.state.collectAsState().value
     val loading = uiState.isLoadingCities
     val page = uiState.page
+    citiesViewModel.getAllCities()
+    citiesViewModel.getCurrentPage()
 
     var showClearIcon by remember { mutableStateOf(false) }
 

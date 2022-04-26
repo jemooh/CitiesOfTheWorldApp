@@ -28,13 +28,8 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
     private var fetchRemoteCitiesJob: Job? = null
 
 
-    init {
-        getAllCities()
-        getCurrentPage()
-    }
 
-
-    private fun getCurrentPage() {
+    fun getCurrentPage() {
         viewModelScope.launch {
             citiesRepository.getCurrentPage()
                 ?.onEach { page_ ->
@@ -45,7 +40,7 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
         }
     }
 
-    private fun fetchRemoteCities() {
+    fun fetchRemoteCities() {
         fetchRemoteCitiesJob?.cancel()
         fetchRemoteCitiesJob = viewModelScope.launch(Dispatchers.IO) {
             when (val result = citiesRepository.fetchRemoteCities(1)) {
@@ -70,7 +65,7 @@ class CitiesViewModel(private val citiesRepository: CitiesRepository) :
         }
     }
 
-    private fun searchRemoteCities(query: String) {
+    fun searchRemoteCities(query: String) {
         _state.value.isSearchingCities = true
         searchRemoteCitiesJob?.cancel()
         searchRemoteCitiesJob = viewModelScope.launch(Dispatchers.IO) {
